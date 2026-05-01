@@ -1,0 +1,177 @@
+/* ── Dark mode fixes for custom "New Matter" registration form ── */
+
+[data-theme=dark] #new-matter-container {
+    border-top-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme=dark] #new-matter-container > div:first-child {
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+[data-theme=dark] #new-matter-container label {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-theme=dark] #cl-matter-name,
+[data-theme=dark] #cl-matter-pw {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.23) !important;
+    color: #fff !important;
+}
+
+[data-theme=dark] #cl-matter-name::placeholder,
+[data-theme=dark] #cl-matter-pw::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+[data-theme=dark] #cl-matter-name:focus,
+[data-theme=dark] #cl-matter-pw:focus {
+    border-color: #90caf9 !important;
+    outline: none;
+}
+
+[data-theme=dark] #cl-create-matter {
+    background: #1565c0 !important;
+}
+
+[data-theme=dark] #cl-matter-msg {
+    color: inherit;
+}
+
+/* ── Light mode: ensure form text is readable ── */
+
+[data-theme=light] #new-matter-container label {
+    color: #555 !important;
+}
+
+[data-theme=light] #cl-matter-name,
+[data-theme=light] #cl-matter-pw {
+    background-color: #fff !important;
+    border-color: #ccc !important;
+    color: #111 !important;
+}
+
+/* ── General dark mode input/text contrast fixes ── */
+
+/* MUI outlined input text */
+[data-theme=dark] .MuiOutlinedInput-input {
+    color: #fff !important;
+}
+
+/* MUI input label */
+[data-theme=dark] .MuiInputLabel-root {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-theme=dark] .MuiInputLabel-root.Mui-focused {
+    color: #90caf9 !important;
+}
+
+/* MUI helper text */
+[data-theme=dark] .MuiFormHelperText-root {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* MUI outlined input border */
+[data-theme=dark] .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 255, 255, 0.23) !important;
+}
+
+[data-theme=dark] .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Placeholder text in dark mode */
+[data-theme=dark] input::placeholder,
+[data-theme=dark] textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+    opacity: 1;
+}
+
+/* MUI Typography / body text */
+[data-theme=dark] .MuiTypography-root {
+    color: inherit;
+}
+
+/* Chip / badge text */
+[data-theme=dark] .MuiChip-label {
+    color: inherit;
+}
+
+/* MUI Select text */
+[data-theme=dark] .MuiSelect-select {
+    color: #fff !important;
+}
+
+/* MUI MenuItem */
+[data-theme=dark] .MuiMenuItem-root {
+    color: #fff !important;
+}
+
+/* Scrollbar for dark mode */
+[data-theme=dark] ::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+[data-theme=dark] ::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+/* Code blocks inside messages */
+[data-theme=dark] pre,
+[data-theme=dark] code {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    color: #e0e0e0 !important;
+}
+
+/* MUI Paper / Card in dark mode */
+[data-theme=dark] .MuiPaper-root {
+    color: #fff;
+}
+
+/* Button text */
+[data-theme=dark] .MuiButton-root {
+    color: inherit;
+}
+
+[data-theme=dark] .MuiButton-text {
+    color: #90caf9 !important;
+}
+
+/* ── Login button text visibility ── */
+[data-theme=dark] button[type=submit],
+[data-theme=dark] .MuiButton-contained {
+    color: #fff !important;
+}
+
+[data-theme=light] button[type=submit],
+[data-theme=light] .MuiButton-contained {
+    color: #fff !important;
+}
+
+/* Catch-all for any contained/filled button */
+.MuiButton-contained {
+    color: #fff !important;
+}
+
+/* ── Login submit button — high specificity override ── */
+form button.MuiButton-root,
+form button.MuiButtonBase-root,
+form .MuiButton-containedPrimary,
+form .MuiButton-containedSecondary,
+button.MuiButton-root.MuiButton-contained,
+button.MuiButton-root[type=submit] {
+    color: #fff !important;
+}
+
+/* Force all button span children (MUI renders text in a span) */
+.MuiButton-root .MuiButton-label,
+.MuiButton-root > span:first-child {
+    color: inherit !important;
+}
+
+/* Nuclear option — any button that is not outlined or text variant */
+button.MuiButton-root:not(.MuiButton-outlined):not(.MuiButton-text) {
+    color: #fff !important;
+}

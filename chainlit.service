@@ -1,0 +1,12 @@
+[Unit]
+Description=Chainlit Service
+After=network.target
+
+[Service]
+ExecStart=python3 -m chainlit run gpt.py --host 10.0.0.203 --port 8010
+User=koni
+WorkingDirectory=/home/koni
+EnvironmentFile=/home/koni/.env
+
+[Install]
+WantedBy=multi-user.target
