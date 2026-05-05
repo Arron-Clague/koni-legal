@@ -18,11 +18,12 @@ from sqlalchemy.ext.asyncio import create_async_engine
 import os
 import uuid
 
-API_KEY    = "sk-xCHdUtMM3-OQzwHVis-QAHEtAelBx897GvzNAy7vG6E"
+API_KEY    = "sk-lpdj0MppqO_-z0I73FOeo39g44qwc6ddJplTu3abNP8"
 BASE_URL   = "http://10.0.0.203:8001"
-FLOW_ID    = "8b58497d-8b8b-416d-9c14-da2b613ec504"
+FLOW_ID    = "9b44d6e7-4592-4df7-85af-95989861d4db"
 RUN_URL    = f"{BASE_URL}/api/v1/run/{FLOW_ID}?stream=true"
 UPLOAD_URL = f"{BASE_URL}/api/v1/files/upload/{FLOW_ID}"
+CHAT_INPUT_ID = "ChatInput-LoD30"
 
 APP_DIR        = Path(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH        = APP_DIR / "chainlit_history.db"
@@ -228,7 +229,9 @@ async def main(message: cl.Message):
 
     # Handle any newly attached files
     if message.elements:
+        print(f"[DEBUG] Received {len(message.elements)} element(s)")
         for element in message.elements:
+            print(f"[DEBUG]   element: name={element.name}, type={type(element).__name__}, path={getattr(element, 'path', 'NO PATH')}")
             if hasattr(element, "path") and element.path:
                 try:
                     with open(element.path, "rb") as f:
@@ -251,14 +254,16 @@ async def main(message: cl.Message):
     response_message = cl.Message(content="")
     await response_message.send()
 
+    thread_id = cl.context.session.thread_id
     def _stream():
         headers = {"Content-Type": "application/json", "x-api-key": API_KEY}
+        print(f"[DEBUG] Sending to LangFlow: file_paths={file_paths}, session_id={thread_id}")
         payload = {
             "output_type": "chat",
             "input_type": "chat",
             "input_value": message.content,
-            "session_id": str(uuid.uuid4()),
-            "tweaks": {"ChatInput-Y4Iyk": {"files": file_paths}},
+            "session_id": thread_id,
+            "tweaks": {CHAT_INPUT_ID: {"files": file_paths}},
         }
         buffer = b""
         with httpx.Client(timeout=None) as client:
